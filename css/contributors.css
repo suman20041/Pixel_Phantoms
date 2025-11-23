@@ -11,22 +11,58 @@
 /* 1. Stats Grid */
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+    /* Force 6 equal columns */
+    grid-template-columns: repeat(6, 1fr); 
+    gap: 15px;
     margin-bottom: 50px;
+    width: 100%;
+    /* Horizontal scroll on mobile if it gets too tight */
+    overflow-x: auto;
+    padding-bottom: 10px; /* Space for scrollbar if needed */
 }
 
 .stat-card {
     background: var(--card-bg);
-    padding: 20px;
+    padding: 15px 10px; /* Reduced horizontal padding */
     border-radius: 12px;
     border: 1px solid var(--border-color);
     text-align: center;
     box-shadow: var(--shadow);
+    min-width: 120px; /* Ensure cards don't get crushed */
+    
+    /* Flex for vertical centering */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.stat-card h3 { font-size: 1rem; color: var(--text-secondary); margin-bottom: 5px; }
-.stat-card p { font-size: 2rem; font-weight: bold; margin: 0; color: var(--accent-color); }
+.stat-card h3 { 
+    font-size: 0.9rem; 
+    color: var(--text-secondary); 
+    margin-bottom: 8px;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.stat-card p { 
+    font-size: 1.5rem; 
+    font-weight: bold; 
+    margin: 0; 
+    color: var(--accent-color); 
+}
+
+/* Responsive: On very small screens, allow horizontal scroll */
+@media (max-width: 900px) {
+    .stats-grid {
+        /* Keeps them in one line but scrollable */
+        display: flex; 
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+    }
+    .stat-card {
+        flex: 0 0 140px; /* Fixed width cards on mobile */
+    }
+}
 
 /* 2. Project Lead Card */
 .lead-container {
