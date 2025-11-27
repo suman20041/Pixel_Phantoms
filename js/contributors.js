@@ -149,20 +149,21 @@ function processData(repoData, contributors, pulls, totalCommits) {
         };
     });
 
+
     // C. Filter Lead & Remove contributors with 0 PRs
     contributorsData = contributorsData
         .filter(c => c.login.toLowerCase() !== REPO_OWNER.toLowerCase() && c.prs > 0)
         // Sort by Points (Desc)
         .sort((a, b) => b.points - a.points); 
 
-    // D. Update DOM Stats
+    // [FIX] D. Update DOM Stats
     updateGlobalStats(
-        contributors.length, 
+        contributorsData.length, // <--- CHANGED THIS
         totalProjectPRs, 
         totalProjectPoints, 
         repoData.stargazers_count, 
         repoData.forks_count,
-        totalCommits // Pass retrieved commits count
+        totalCommits
     );
 
     // E. Render Grid
@@ -256,7 +257,8 @@ window.changePage = function(newPage) {
 // 5. Modal Logic
 function openModal(contributor, league, rank) {
     const modal = document.getElementById('contributor-modal');
-    
+    const modalContainer = modal.querySelector('.modal-container'); // Select the inner container
+
     document.getElementById('modal-avatar').src = contributor.avatar_url;
     document.getElementById('modal-name').textContent = contributor.login;
     document.getElementById('modal-id').textContent = `ID: ${contributor.id}`; 
@@ -264,24 +266,20 @@ function openModal(contributor, league, rank) {
     document.getElementById('modal-rank').textContent = `#${rank}`;
     document.getElementById('modal-score').textContent = contributor.points;
     document.getElementById('modal-prs').textContent = contributor.prs;
-    document.getElementById('modal-commits').textContent = contributor.contributions; // GitHub API provided contributions (commits)
+    document.getElementById('modal-commits').textContent = contributor.contributions;
     document.getElementById('modal-league-badge').textContent = league.label;
 
     const prLink = `https://github.com/${REPO_OWNER}/${REPO_NAME}/pulls?q=is%3Apr+author%3A${contributor.login}`;
     document.getElementById('modal-pr-link').href = prLink;
     document.getElementById('modal-profile-link').href = contributor.html_url;
 
+    // [FIX] RESET CLASSES & ADD CURRENT LEAGUE CLASS
+    // This allows CSS to change colors based on tier-gold, tier-silver, etc.
+    modalContainer.className = 'modal-container'; // Reset
+    modalContainer.classList.add(league.tier);  // Add specific tier class
+
     modal.classList.add('active');
 }
-
-window.closeModal = function() {
-    document.getElementById('contributor-modal').classList.remove('active');
-}
-
-// Close on outside click
-document.getElementById('contributor-modal').addEventListener('click', (e) => {
-    if(e.target.id === 'contributor-modal') closeModal();
-});
 
 // 6. Recent Activity
 async function fetchRecentActivity() {
