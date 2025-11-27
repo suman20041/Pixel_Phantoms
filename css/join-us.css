@@ -1,0 +1,85 @@
+/* ================= JOIN US PAGE STYLES ================= */
+
+/* Steps Grid Layout */
+.join-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+/* Individual Step Card */
+.step-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 30px;
+    border-radius: 8px;
+    position: relative;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.step-card:hover {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 20px rgba(0, 170, 255, 0.2);
+    transform: translateY(-5px);
+}
+
+/* Big Number Background */
+.step-number {
+    font-size: 4rem;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    opacity: 0.1;
+    font-weight: 800;
+    color: var(--accent-color);
+    z-index: 0;
+}
+
+/* Icons */
+.step-icon {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.step-card h3 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.step-card p {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Glitch Button Variant for Discord */
+.btn-discord {
+    background: #5865F2; /* Discord Brand Color */
+    color: white;
+    text-decoration: none;
+    padding: 12px 25px;
+    font-weight: bold;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+    transition: all 0.3s ease;
+}
+
+.btn-discord:hover {
+    background: #4752c4;
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(88, 101, 242, 0.5);
+    color: white;
+}

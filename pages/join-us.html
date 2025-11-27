@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Phantoms | Join Protocol</title>
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/home-gsap.css"> 
+    <link rel="stylesheet" href="../css/back-to-top.css">
+    
+    <link rel="stylesheet" href="../css/join-us.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="hacker-theme">
+
+    <div id="cursor-highlight"></div>
+
+    <div id="navbar-placeholder"></div>
+
+    <main id="main-container">
+        
+        <section class="hero-section" id="hero">
+            <div class="grid-overlay"></div>
+            <div class="hero-content">
+                <h1 class="hero-glitch" data-text="INIT_RECRUITMENT">INIT_RECRUITMENT</h1>
+                
+                <div class="terminal-box">
+                    <p class="console-text">> User detected. Access level: GUEST</p>
+                    <p class="console-text">> Executing join_protocol.exe...</p>
+                    <p class="console-text">> Target: Pixel Phantoms Community</p>
+                    <p class="console-text success">> Status: READY_TO_ONBOARD</p>
+                </div>
+                
+                <p class="section-sub" style="margin-top: 20px;">
+                    Connect with developers, hackers, and creators. <br>
+                    Your journey into the source code begins here.
+                </p>
+            </div>
+        </section>
+
+        <section class="cyber-seminars" style="background: var(--bg-secondary);">
+            <div class="container">
+                <div class="section-header-terminal">
+                    <h2><i class="fas fa-network-wired"></i> CONNECTION_STEPS</h2>
+                    <div class="line-scanner"></div>
+                </div>
+
+                <div class="join-steps-grid">
+                    
+                    <div class="step-card reveal-card">
+                        <span class="step-number">01</span>
+                        <div class="step-icon"><i class="fab fa-discord"></i></div>
+                        <h3>Join Server</h3>
+                        <p>Enter our digital HQ. This is where announcements, team formations, and discussions happen.</p>
+                        <a href="https://discord.gg/your-invite-link" target="_blank" class="btn-discord">
+                            <i class="fab fa-discord"></i> CONNECT_DISCORD
+                        </a>
+                    </div>
+
+                    <div class="step-card reveal-card">
+                        <span class="step-number">02</span>
+                        <div class="step-icon"><i class="fas fa-file-signature"></i></div>
+                        <h3>Register ID</h3>
+                        <p>Fill out the official member intake form to get your unique Phantom ID and access roles.</p>
+                        <a href="https://forms.google.com/your-form-link" target="_blank" class="btn-hollow">
+                            OPEN_FORM()
+                        </a>
+                    </div>
+
+                    <div class="step-card reveal-card">
+                        <span class="step-number">03</span>
+                        <div class="step-icon"><i class="fab fa-github"></i></div>
+                        <h3>Fork Repo</h3>
+                        <p>Star and fork our main repository to verify your developer status on the leaderboard.</p>
+                        <a href="https://github.com/sayeeg-11/Pixel_Phantoms" target="_blank" class="btn-hollow">
+                            GIT_ACCESS &rarr;
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="terminal-updates">
+            <div class="container" style="text-align: center; margin-bottom: 40px;">
+                <h2 class="section-header-glitch" data-text="SYSTEM_LOGS">SYSTEM_LOGS</h2>
+            </div>
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                    <span class="title">admin@phantoms:~/recruitment</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="log-entry"><span class="timestamp">[10:00]</span> <span class="user">sys:</span> <span class="msg">Recruitment drive active.</span></div>
+                    <div class="log-entry"><span class="timestamp">[10:02]</span> <span class="user">bot:</span> <span class="msg">Waiting for user verification...</span></div>
+                    <div class="log-entry"><span class="timestamp">[10:05]</span> <span class="user">root:</span> <span class="msg warning">Ensure you read the Code of Conduct.</span></div>
+                    <div class="log-entry"><span class="timestamp">[AUTO]</span> <span class="user">net:</span> <span class="msg highlight">Welcome to the future.</span></div>
+                    <div class="typing-indicator">_</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer-placeholder" style="position: relative; z-index: 2;"></div>
+
+    <script src="../js/navbar.js"></script>
+    <script src="../js/footer.js"></script>
+    <script>
+        renderNavbar('../');
+        renderFooter('../');
+    </script>
+    <script src="../js/theme.js"></script>
+    <script src="../js/back-to-top.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script src="../js/join-us.js"></script>
+</body>
+</html>
