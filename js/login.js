@@ -14,39 +14,49 @@ document.addEventListener('DOMContentLoaded', () => {
     // Login form fields
     const usernameInput = document.getElementById('username');
     const passwordInput = document.getElementById('password');
-    const loginBtn = document.getElementById('login-btn');
     
     // Sign Up form fields
     const newUsernameInput = document.getElementById('new-username');
     const newEmailInput = document.getElementById('new-email');
     const newPasswordInput = document.getElementById('new-password');
-    const signupBtn = document.getElementById('signup-btn');
 
     // Verification elements
     const verificationIcon = verificationView.querySelector('.verification-icon i');
     const verificationTitle = document.getElementById('verification-title');
     const verificationMessage = document.getElementById('verification-message');
     
-    // --- AUTHENTICATION DATA MANAGEMENT (Simulating Backend with Local Storage) ---
-    // Mock data for initial CSV load if localStorage is empty.
+    // --- AUTHENTICATION DATA MANAGEMENT (Simulating Persistent JSON Store) ---
+    
+    // Mock CSV data used as the guaranteed base dataset.
     const MOCK_CSV_DATA = [
         { codename: 'neo_one', email: 'neo@pixelphantoms.com', password_hash: 'matrix_secure_hash' },
         { codename: 'test_agent', email: 'test@pixelphantoms.com', password_hash: 'password123_secure_hash' }
     ];
 
     /**
-     * Initializes or retrieves user accounts from Local Storage.
-     * New registrations are stored/checked here, simulating a dynamic database.
-     * WARNING: This is INSECURE and for frontend simulation only.
+     * Retrieves all accounts, merging mock data with user-created data for robustness.
+     * This function guarantees that the mock accounts are always present.
      */
     function getAccounts() {
-        let accounts = JSON.parse(localStorage.getItem('user_accounts'));
-        if (!accounts || accounts.length === 0) {
-            // Initialize with mock CSV data if storage is empty
-            accounts = MOCK_CSV_DATA;
-            localStorage.setItem('user_accounts', JSON.stringify(accounts));
-        }
-        return accounts;
+        // 1. Get user-created accounts from Local Storage (our persistent JSON store)
+        const userStoredAccounts = JSON.parse(localStorage.getItem('user_accounts')) || [];
+        
+        // 2. Create a map of mock accounts for quick lookup by codename
+        const mockCodenameSet = new Set(MOCK_CSV_DATA.map(acc => acc.codename));
+        
+        // 3. Filter the user-stored accounts to remove any duplicates of the mock accounts
+        const uniqueUserAccounts = userStoredAccounts.filter(userAcc => 
+            !mockCodenameSet.has(userAcc.codename)
+        );
+
+        // 4. Merge mock accounts (baseline) with unique user-created accounts
+        const finalAccounts = [...MOCK_CSV_DATA, ...uniqueUserAccounts];
+
+        // 5. Save the merged, guaranteed functional list back to Local Storage
+        // This ensures subsequent page loads start with correct data.
+        localStorage.setItem('user_accounts', JSON.stringify(finalAccounts));
+        
+        return finalAccounts;
     }
 
     function addAccount(codename, email, password) {
@@ -61,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             password_hash: password_hash
         };
         
+        // Push the new account to the array and save the list
         accounts.push(newAccount);
         localStorage.setItem('user_accounts', JSON.stringify(accounts));
     }
@@ -87,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         );
     }
 
-    // --- UTILITY FUNCTIONS (Unchanged) ---
+    // --- UTILITY FUNCTIONS ---
     function showError(id, message) {
         const errorElement = document.getElementById(id);
         errorElement.textContent = message;
@@ -111,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return true;
     }
 
-    // --- STATE MANAGEMENT (Unchanged) ---
+    // --- STATE MANAGEMENT ---
     function setActiveView(viewId) {
         const views = [loginView, signupView, verificationView];
         views.forEach(view => {
@@ -125,8 +136,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function setAuthMode(mode) {
-        loginTabBtn.classList.remove('active');
-        signupTabBtn.classList.remove('active');
+        const tabBtns = [loginTabBtn, signupTabBtn];
+        tabBtns.forEach(btn => btn.classList.remove('active'));
         
         if (mode === 'login') {
             loginTabBtn.classList.add('active');
@@ -141,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- SCREENING/SIMULATION LOGIC (UPDATED FOR DATABASE CHECK) ---
+    // --- SCREENING/SIMULATION LOGIC ---
 
     function startVerificationSimulation(isLogin) {
         setAuthMode('verification'); 
@@ -182,8 +193,12 @@ document.addEventListener('DOMContentLoaded', () => {
             let failureReason = '';
             
             if (isLogin) {
+                // Check against the robust Local Storage database
                 const account = checkLogin(usernameInput.value, passwordInput.value);
                 isSuccess = !!account;
+                if (!isSuccess) {
+                    failureReason = 'AUTH_FAIL: Invalid Codename or Passkey.';
+                }
             } else { // Sign Up Logic
                 const codename = newUsernameInput.value;
                 const email = newEmailInput.value;
@@ -219,6 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         if (!isLogin) {
+            // Clear sign up fields
             newUsernameInput.value = '';
             newEmailInput.value = '';
             newPasswordInput.value = '';
@@ -233,7 +249,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handleFailure(isLogin, customReason = '') {
         const errorMessages = isLogin ? [
-            'AUTH_FAIL: Invalid Codename or Passkey.',
             'UNAUTHORIZED ACCESS: Security violation detected.',
             'HASH_MISMATCH: Protocol rejected credentials.'
         ] : [
@@ -255,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- EVENT HANDLERS (Unchanged) ---
+    // --- EVENT HANDLERS ---
     
     loginTabBtn.addEventListener('click', () => setAuthMode('login'));
     signupTabBtn.addEventListener('click', () => setAuthMode('signup'));
@@ -265,18 +280,19 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         
         let formValid = true;
+        const currentView = loginView.classList.contains('active') ? 'login' : signupView.classList.contains('active') ? 'signup' : null;
 
-        if (loginView.classList.contains('active')) {
+        if (currentView === 'login') {
             formValid &= validateField(usernameInput, 'username-error', 'Codename is required');
             formValid &= validateField(passwordInput, 'password-error', 'Passkey is required');
-        } else if (signupView.classList.contains('active')) {
+        } else if (currentView === 'signup') {
             formValid &= validateField(newUsernameInput, 'new-username-error', 'Codename is required');
             formValid &= validateField(newEmailInput, 'new-email-error', 'Email Key is required');
             formValid &= validateField(newPasswordInput, 'new-password-error', 'Passkey is required');
         }
 
         if (formValid) {
-            startVerificationSimulation(loginView.classList.contains('active'));
+            startVerificationSimulation(currentView === 'login');
         } else {
             feedbackMsg.textContent = '❌ Input validation failed. Check required fields.';
             feedbackMsg.className = 'feedback-message error show';
@@ -284,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- INITIALIZATION (Unchanged) ---
+    // --- INITIALIZATION ---
     function initMatrixRain() {
         const canvas = document.getElementById('cyber-rain-canvas');
         if (!canvas) return; 
