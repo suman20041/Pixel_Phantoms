@@ -6,7 +6,7 @@
 - [📁 Project Structure](#-project-structure)
 - [🎨 Screenshot / Demo](#-screenshot--demo)
 - [🤝 How to Contribute](#-how-to-contribute)
-- [🧑‍💻 Core Committee — 2024–25](#-core-committee--202425)
+- [🧑‍💻 Core Committee — 2024–25](#-core-committee--2024-25)
 - [🛠 Tech Stack](#-tech-stack)
 - [🗺️ Project Roadmap](#-project-roadmap)
 - [📝 Issues](#-issues)
@@ -197,7 +197,7 @@ We welcome **all contributions** — design updates, animations, UI fixes, new p
    ```
 6. Submit a Pull Request 🎉
 
-👉 Detailed contribution guidelines are in **`docs/CONTRIBUTING.md`**
+👉 Detailed contribution guidelines -> [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
 ---
 
@@ -271,7 +271,7 @@ Have an idea?
 # 📌 License
 
 This project is licensed under the **MIT License**.
-See the full license in the `LICENSE` file.
+See the full license in the [`LICENSE`](LICENSE) file.
 
 ---
 
