@@ -3,65 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pixel Phantoms | Candidate Protocol</title>
-    
+    <title>Pixel Phantoms | System Protocol V2</title>
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/leaderboard.css">
     <link rel="stylesheet" href="../css/protocol.css">
-    
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="dark-theme hud-mode">
-    <div class="protocol-visuals">
-        <div class="scanline"></div>
-        <div class="circuit-grid" id="circuit-bg"></div>
-    </div>
+    <canvas id="signalCanvas"></canvas>
 
-    <div id="navbar-placeholder"></div>
-
-    <main class="protocol-container">
-        <header class="protocol-header">
+    <div class="protocol-wrapper">
+        <header class="centered-header">
             <h1 class="glitch-title" data-text="SYSTEM_PROTOCOL_V2">SYSTEM_PROTOCOL_V2</h1>
-            <div class="status-bar">
-                <span class="pulse-dot"></span> 
-                <span class="status-text">ENFORCING_DOMINATION_LOGIC</span>
+            <div class="status-indicator">
+                <span class="pulse-node"></span>
+                <span class="status-code">CORE_LOGIC_ACTIVE</span>
             </div>
         </header>
 
-        <div class="bento-grid">
-            <section class="bento-item rulebook-card neon-border-blue">
-                <div class="card-glow"></div>
-                <h3 class="terminal-label"><i class="fas fa-file-code"></i> CANDIDATE_RULEBOOK</h3>
-                <ul class="rule-list">
+        <div class="bento-container">
+            <section class="protocol-box neon-glow-blue">
+                <h3 class="box-label"><i class="fas fa-microchip"></i> DOMINATION_METRIC</h3>
+                <div class="metric-display">
+                    <div class="metric-pill">L1: 200 XP</div>
+                    <div class="metric-pill">L2: 500 XP</div>
+                    <div class="metric-pill">L3: 1100 XP</div>
+                </div>
+                <p class="box-text">Scoring weighted by the Multidimensional Contribution Score (MCS).</p>
+            </section>
+
+            <section class="protocol-box neon-glow-purple">
+                <h3 class="box-label"><i class="fas fa-shield-alt"></i> SECURITY_ENFORCEMENT</h3>
+                <ul class="box-list">
                     <li>Standardized participation for all campus tiers.</li>
                     <li>Mandatory Git-hook security compliance.</li>
-                    <li>Automated scoring based on PR depth.</li>
                 </ul>
             </section>
-
-            <section class="bento-item complexity-card neon-border-purple">
-                <h3 class="terminal-label"><i class="fas fa-layer-group"></i> SCORING_MATRIX</h3>
-                <div class="scoring-pills">
-                    <div class="pill">L1: 200 XP</div>
-                    <div class="pill">L2: 500 XP</div>
-                    <div class="pill">L3: 1100 XP</div>
-                </div>
-                <p class="transparency-note">Scoring is weighted by the Multidimensional Contribution Score (MCS).</p>
-            </section>
-
-            <section class="bento-item logic-card neon-border-green">
-                <h3 class="terminal-label"><i class="fas fa-project-diagram"></i> DOMINATION_LOGIC</h3>
-                <div class="logic-table" id="logic-matrix">
-                    </div>
-            </section>
         </div>
-    </main>
 
-    <div id="footer-placeholder"></div>
+        <div class="rules-footer">
+            <h2 class="rules-title">SYSTEM_GUIDELINES</h2>
+            <div class="glowing-rule">
+                <span class="rule-icon"><i class="fas fa-check-circle"></i></span>
+                <p>Standardized 250 XP reward for verified attendance.</p>
+            </div>
+            <div class="glowing-rule">
+                <span class="rule-icon"><i class="fas fa-info-circle"></i></span>
+                <p>Knowledge Base linked directly to Discipline Tracks.</p>
+            </div>
+        </div>
+    </div>
 
     <script src="../js/navbar.js"></script>
+    <script>renderNavbar('../');</script>
     <script src="../js/footer.js"></script>
+    <script>renderFooter('../');</script>
+
     <script src="../js/protocol.js"></script>
 </body>
 </html>

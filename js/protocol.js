@@ -1,42 +1,64 @@
-document.addEventListener('DOMContentLoaded', () => {
-    generateCircuitLines();
-    renderDominationLogic();
-    
-    // Sync with global theme indicator if present
-    console.log("Protocol Sync: Online");
-});
+// protocol.js
+const canvas = document.getElementById('signalCanvas');
+const ctx = canvas.getContext('2d');
 
-function generateCircuitLines() {
-    const container = document.getElementById('circuit-bg');
-    for (let i = 0; i < 12; i++) {
-        const line = document.createElement('div');
-        line.className = 'circuit-line';
-        
-        // Random placement
-        line.style.top = Math.random() * 100 + '%';
-        line.style.left = Math.random() * 100 + '%';
-        line.style.width = Math.random() * 200 + 50 + 'px';
-        line.style.height = '2px';
-        line.style.animationDelay = Math.random() * 5 + 's';
-        
-        container.appendChild(line);
+let particles = [];
+const particleCount = 1000; // Action Plan Item 2
+
+function initCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    particles = [];
+    for (let i = 0; i < particleCount; i++) {
+        particles.push(new Signal());
     }
 }
 
-function renderDominationLogic() {
-    // Transparency Data for Leaderboard Logic
-    const matrix = [
-        { label: "Code Complexity ($Weight_i$)", val: "60%", status: "CORE" },
-        { label: "Community Support", val: "25%", status: "STABLE" },
-        { label: "R&D Archive Bonus", val: "15%", status: "BONUS" }
-    ];
+class Signal {
+    constructor() {
+        this.reset();
+    }
 
-    const matrixContainer = document.getElementById('logic-matrix');
-    matrixContainer.innerHTML = matrix.map(item => `
-        <div class="logic-row">
-            <span class="logic-label">${item.label}</span>
-            <span class="logic-value">${item.val}</span>
-            <span class="logic-status badge-${item.status.toLowerCase()}">${item.status}</span>
-        </div>
-    `).join('');
+    reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.speed = Math.random() * 2 + 1;
+        this.length = Math.random() * 100 + 50;
+        this.opacity = Math.random() * 0.5;
+        this.color = Math.random() > 0.5 ? '#00aaff' : '#bc13fe';
+    }
+
+    draw() {
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(this.x, this.y + this.length);
+        ctx.strokeStyle = this.color;
+        ctx.globalAlpha = this.opacity;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        this.y += this.speed;
+        if (this.y > canvas.height) {
+            this.y = -this.length;
+            this.x = Math.random() * canvas.width;
+        }
+    }
 }
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Add grid lines for "circuit" feel
+    ctx.strokeStyle = 'rgba(0, 170, 255, 0.03)';
+    for(let i=0; i<canvas.width; i+=50) {
+        ctx.beginPath(); ctx.moveTo(i,0); ctx.lineTo(i, canvas.height); ctx.stroke();
+    }
+    
+    particles.forEach(p => p.draw());
+    requestAnimationFrame(animate);
+}
+
+window.addEventListener('resize', initCanvas);
+initCanvas();
+animate();
+
+console.log("System Protocol V2: Visual Matrix Synchronized");
