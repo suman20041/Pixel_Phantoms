@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
           ViewCounter.updateViewDisplay(eventId, newCount);
         });
 
-        container.appendChild(card);
+            <div class="event-views" aria-label="View count: ${formattedViews} view${viewCount !== 1 ? 's' : ''}">
               <span class="view-icon"><i class="fa-solid fa-eye" aria-hidden="true"></i></span>
               <span class="view-count" data-view-for="${eventId}">${formattedViews} view${viewCount === 1 && viewCount < 1000 ? '' : 's'}</span>
 
