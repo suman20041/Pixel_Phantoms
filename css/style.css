@@ -2569,6 +2569,62 @@ body.mobile-menu-open {
   }
 }
 
+/* Focus Footer Link Enhancement */
+.focus-footer {
+  text-align: center;
+  margin-top: 40px;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-family: var(--font-primary);
+}
+
+.focus-footer .cyber-link {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.focus-footer .cyber-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-color);
+  transition: width 0.3s ease;
+}
+
+.focus-footer .cyber-link:hover {
+  color: var(--accent-color);
+  text-decoration: none;
+  background: rgba(0, 170, 255, 0.1);
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+.focus-footer .cyber-link:hover::after {
+  width: 100%;
+}
+
+/* Ensure visibility in dark theme */
+[data-theme="dark"] .focus-footer .cyber-link {
+  color: var(--neon-cyan);
+}
+
+[data-theme="dark"] .focus-footer .cyber-link:hover {
+  background: rgba(0, 170, 255, 0.15);
+  box-shadow: 0 0 10px rgba(0, 170, 255, 0.3);
+}
+
+
 /* =========================================
      ACCESSIBILITY: SKIP TO CONTENT LINK
      ========================================= */
