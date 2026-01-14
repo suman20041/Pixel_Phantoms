@@ -1097,7 +1097,7 @@ body.dark-mode .calendar .contrib-legend .legend {
 
 /* ================= RESPONSIVE DESIGN ================= */
 
-/* Laptop  */
+/* Large Laptop / Desktop */
 @media (min-width: 1445px) and (max-width: 2560px) {
   .contributors-grid {
     grid-template-columns: repeat(5, 1fr);
@@ -1114,7 +1114,9 @@ body.dark-mode .calendar .contrib-legend .legend {
     height: 80px;
   }
 }
-@media (min-width: 1025px) and (max-width: 1440px) {
+
+/* Medium Laptop */
+@media (min-width: 1028px) and (max-width: 1444px) {
   .contributors-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
@@ -1131,7 +1133,8 @@ body.dark-mode .calendar .contrib-legend .legend {
   }
 }
 
-@media (min-width: 769px) and (max-width: 1024px) {
+/* Small Laptop / Large Tablet */
+@media (min-width: 769px) and (max-width: 1027px) {
   .contributors-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
@@ -1150,20 +1153,6 @@ body.dark-mode .calendar .contrib-legend .legend {
 
 /* Tablet */
 @media (max-width: 768px) {
-
-  /* --- Contributors grid responsive tweaks --- */
-  .contributors-section {
-    padding: 50px 32px;
-  }
-
-  .contributors-grid {
-    gap: 20px;
-    padding: 0 16px;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  }
-}
-
-@media (max-width: 768px) {
   .contributors-section {
     padding: 42px 20px;
   }
@@ -1174,16 +1163,17 @@ body.dark-mode .calendar .contrib-legend .legend {
     padding: 0 18px;
   }
 
+  .contributor-card {
+    padding: 18px;
+  }
+
   .contributor-card img {
     width: 72px;
     height: 72px;
   }
-
-  .contributor-card {
-    padding: 18px;
-  }
 }
 
+/* Mobile */
 @media (max-width: 480px) {
   .contributors-section {
     padding: 32px 12px;
