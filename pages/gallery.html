@@ -4,17 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pixel Phantoms | Gallery</title>
-    <link rel="icon" href="../assets/logo.png">
-    
-    <link rel="stylesheet" href="../css/scroll-progress.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/cursor-effect.css">
-    <link rel="stylesheet" href="../css/gallery.css">
-    <link rel="stylesheet" href="../css/back-to-top.css">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body class="hacker-theme">
+    <link rel="icon" href="../assets/logo.png" />
+
+    <link rel="stylesheet" href="../css/scroll-progress.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/cursor-effect.css" />
+    <link rel="stylesheet" href="../css/gallery.css" />
+    <link rel="stylesheet" href="../css/animations.css" />
+    <link rel="stylesheet" href="../css/back-to-top.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body class="hacker-theme">
     <div id="scroll-progress-container">
       <div id="scroll-progress-bar"></div>
     </div>
@@ -31,6 +38,7 @@
     </script>
 
     <div class="main-content" id="main-gallery" tabindex="-1">
+      <div class="page-transition-wrapper" data-page="gallery">
       <section class="gallery-hero">
         <div class="hero-content">
           <h1>Moments & Memories</h1>
@@ -171,6 +179,7 @@
         </div>
       </section>
     </div>
+    </div>
 
     <div id="lightbox" class="lightbox">
       <span class="close-lightbox">&times;</span>
@@ -184,6 +193,7 @@
       renderFooter('../');
     </script>
 
+    <script src="../js/page-transitions.js" defer></script>
     <script src="../js/theme.js"></script>
     <script src="../js/cursor-effect.js"></script>
     <script src="../js/back-to-top.js"></script>
